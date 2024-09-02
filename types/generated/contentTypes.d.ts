@@ -788,6 +788,42 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiAuthorAuthor extends Schema.CollectionType {
+  collectionName: 'authors';
+  info: {
+    singularName: 'author';
+    pluralName: 'authors';
+    displayName: 'Author';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    firstName: Attribute.String & Attribute.Required;
+    lastName: Attribute.String & Attribute.Required;
+    concepts: Attribute.Relation<
+      'api::author.author',
+      'manyToMany',
+      'api::concept.concept'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::author.author',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::author.author',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiCategoryCategory extends Schema.CollectionType {
   collectionName: 'categories';
   info: {
@@ -842,6 +878,12 @@ export interface ApiConceptConcept extends Schema.CollectionType {
       'manyToMany',
       'api::category.category'
     >;
+    authors: Attribute.Relation<
+      'api::concept.concept',
+      'manyToMany',
+      'api::author.author'
+    >;
+    content: Attribute.RichText;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -878,6 +920,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::author.author': ApiAuthorAuthor;
       'api::category.category': ApiCategoryCategory;
       'api::concept.concept': ApiConceptConcept;
     }
