@@ -4,7 +4,8 @@
   "info": {
     "singularName": "author",
     "pluralName": "authors",
-    "displayName": "Author"
+    "displayName": "Author",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -24,6 +25,17 @@
       "relation": "manyToMany",
       "target": "api::concept.concept",
       "inversedBy": "authors"
+    },
+    "formation": {
+      "type": "string",
+      "required": true
+    },
+    "charge": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email",
+      "required": true
     }
   }
 }
