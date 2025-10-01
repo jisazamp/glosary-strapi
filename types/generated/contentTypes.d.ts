@@ -479,6 +479,68 @@ export interface ApiConceptConcept extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiInvestigatorInvestigator
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'investigators';
+  info: {
+    description: '';
+    displayName: 'Investigator';
+    pluralName: 'investigators';
+    singularName: 'investigator';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    academicFormation: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 100;
+      }>;
+    academicTitle: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 8;
+      }>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 300;
+      }>;
+    email: Schema.Attribute.Email &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    firstName: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 25;
+        minLength: 3;
+      }>;
+    investigationGroup: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 140;
+      }>;
+    lastName: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 25;
+        minLength: 3;
+      }>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::investigator.investigator'
+    > &
+      Schema.Attribute.Private;
+    orcidUrl: Schema.Attribute.String;
+    profilePhoto: Schema.Attribute.Media<'files' | 'images'>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -991,6 +1053,7 @@ declare module '@strapi/strapi' {
       'api::author.author': ApiAuthorAuthor;
       'api::category.category': ApiCategoryCategory;
       'api::concept.concept': ApiConceptConcept;
+      'api::investigator.investigator': ApiInvestigatorInvestigator;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
