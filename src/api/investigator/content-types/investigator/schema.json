@@ -40,21 +40,20 @@
       "type": "string"
     },
     "description": {
-      "type": "string",
-      "maxLength": 300
+      "type": "text"
     },
     "academicTitle": {
       "type": "string",
       "maxLength": 8
     },
     "profilePhoto": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "files",
         "images"
-      ],
-      "type": "media",
-      "multiple": false,
-      "required": false
+      ]
     }
   }
 }

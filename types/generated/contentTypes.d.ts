@@ -504,10 +504,7 @@ export interface ApiInvestigatorInvestigator
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.String &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 300;
-      }>;
+    description: Schema.Attribute.Text;
     email: Schema.Attribute.Email &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
