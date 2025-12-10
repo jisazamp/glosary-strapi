@@ -36,6 +36,9 @@
     "email": {
       "type": "email",
       "required": true
+    },
+    "description": {
+      "type": "text"
     }
   }
 }
